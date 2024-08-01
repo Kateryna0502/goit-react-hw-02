@@ -8,7 +8,7 @@ const Feedback = ({ good, neutral, bad, total, positive }) => {
         <li>
           <b>Total</b>: {total}
               </li>
-              <li>Whiskey: {positive}</li>
+              <li>Positive: {positive}</li>
       </ul>
 
       

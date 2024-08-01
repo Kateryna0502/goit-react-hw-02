@@ -1,16 +1,23 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Description from "./components/Description/Description.jsx";
 import Feedback from "./components/Feedback/Feedback.jsx";
 import Options from "./components/Options/Options.jsx";
+import Notification from "./components/Notification/Notification.jsx";
 
 
 
 function App() {
-    const [feedback, setFeedback] = useState({
-  good: 0,
-	neutral: 0,
-	bad: 0
-  });
+  const [feedback, setFeedback] = useState({
+    good: 0,
+    neutral: 0,
+    bad: 0
+  }) => { return parseInt(localStorage.getItem("reviews") ?? 0) };
+
+  useEffect(() => {
+    localStorage.setItem("reviews", feedback);
+  }, [feedback]);
+
+};
 
   // updateFeedback(feedbackType)
   const updateFeedback = (feedbackType) => {
@@ -20,50 +27,41 @@ function App() {
     setFeedback({ ...feedback, [feedbackType]: feedback[feedbackType] + 1 });
 
     const total = feedback.good + feedback.neutral + feedback.bad;
+    const positive = Math.round((feedback.good / total) * 100);
+    
     return (
       <>
         <div>
-          <Description
-            <h2>Sip Happens Café</h2>
-          <p>Please leave your feedback about our service by selecting one of the options below.</p>
-        />
-        </div>
-
-
+          <Description/>
+               </div>
         <div>
-          <Options
-            <button type="button" onClick={() => onFeedbackAdd("good")}> Good </button>
-          <button type="button" onClick={() => onFeedbackAdd("neutral")}>
-            Neutral
-          </button>
-          <button type="button" onClick={() => onFeedbackAdd("bad")}>
-            Bad
-          </button>
-          <button type="button" onClick={() => onFeedbackAdd("reset")}>
-            Reset
-          </button>
+          <Options/>
+        </div>
+        <div>
+          {total > 0 && (
+            <Feedback
+              good={feedback.good}
+              neutral={feedback.neutral}
+              bad={feedback.bad}
+            
+              total={total}
+            
+              positive={positive}
+              updateFeedback={updateFeedback}
+              
+
             />
+          )}
         </div>
         <div>
-          <Feedback
-      <ul>
-            <li>Good: {feedback.good}</li>
-            <li>Neuntral: {feedback.neutral}</li>
-            <li>Bad: {feedback.bad}</li>
-            <li>
-              <b>Total</b>: {total}
-            </li>
-            <li>Positive: {positive}</li>
-          </ul>
-
-      />
+          <Notification/>
         </div>
       </>
 
     );
   };
   
-}
+
 
 
 
