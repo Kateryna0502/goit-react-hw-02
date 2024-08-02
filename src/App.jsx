@@ -7,17 +7,18 @@ import Notification from "./components/Notification/Notification.jsx";
 
 
 function App() {
-  const [feedback, setFeedback] = useState({
+  const [feedback, setFeedback] = useState(() => JSON.parse(localStorage.getItem("reviews")) ??
+  {
     good: 0,
     neutral: 0,
     bad: 0
-  }) => { return parseInt(localStorage.getItem("reviews") ?? 0) };
+  })
 
   useEffect(() => {
-    localStorage.setItem("reviews", feedback);
+    localStorage.setItem("reviews", JSON.stringify(feedback));
   }, [feedback]);
 
-};
+
 
   // updateFeedback(feedbackType)
   const updateFeedback = (feedbackType) => {
@@ -32,10 +33,10 @@ function App() {
     return (
       <>
         <div>
-          <Description/>
-               </div>
+          <Description />
+        </div>
         <div>
-          <Options/>
+          <Options />
         </div>
         <div>
           {total > 0 && (
@@ -54,32 +55,32 @@ function App() {
           )}
         </div>
         <div>
-          <Notification/>
+          <Notification />
         </div>
       </>
 
     );
   };
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+}
 export default App
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
