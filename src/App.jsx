@@ -26,7 +26,8 @@ function App() {
     
   
     setFeedback({ ...feedback, [feedbackType]: feedback[feedbackType] + 1 });
-
+  }
+  
     const total = feedback.good + feedback.neutral + feedback.bad;
     const positive = Math.round((feedback.good / total) * 100);
     
@@ -61,7 +62,7 @@ function App() {
 
     );
   };
-}
+
 export default App
 
 
