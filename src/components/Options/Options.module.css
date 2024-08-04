@@ -4,8 +4,8 @@
 color: black;
 padding: 10px;
 border-radius: 3px;
-justify-content: center;
-align-items: center;
+/* justify-content: center; */
+/* align-items: center; */
 cursor: pointer;
 border: 2x solid black;
 margin: 5px;
