@@ -26,16 +26,16 @@ function App() {
     
   
     setFeedback({ ...feedback, [feedbackType]: feedback[feedbackType] + 1 });
-
+}
     const resetFeedback = () => setFeedback({
       good: 0,
       neutral: 0,
       bad: 0
     })
-  }
+  
 
   const total = feedback.good + feedback.neutral + feedback.bad;
-  const positive = Math.round((feedback.good / total) * 100);
+  const positive = Math.round((feedback.good / total) * 100) + '%';
     
   return (
     <>
@@ -43,7 +43,7 @@ function App() {
         <Description />
       </div>
       <div>
-        <Options total={total} updateFeedback={updateFeedback} />
+        <Options total={total} updateFeedback={updateFeedback} resetFeedback={resetFeedback} />
       </div>
       <div>
         {total > 0 && (
