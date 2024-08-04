@@ -29,45 +29,47 @@ function App() {
 
     const resetFeedback = () => setFeedback({
       good: 0,
-    neutral: 0,
-    bad: 0
+      neutral: 0,
+      bad: 0
     })
   }
 
-    const total = feedback.good + feedback.neutral + feedback.bad;
-    const positive = Math.round((feedback.good / total) * 100);
+  const total = feedback.good + feedback.neutral + feedback.bad;
+  const positive = Math.round((feedback.good / total) * 100);
     
-    return (
-      <>
-        <div>
-          <Description />
-        </div>
-        <div>
-          <Options total={total} updateFeedback={updateFeedback}/>
-        </div>
-        <div>
-          {total > 0 && (
-            <Feedback
-              good={feedback.good}
-              neutral={feedback.neutral}
-              bad={feedback.bad}
+  return (
+    <>
+      <div>
+        <Description />
+      </div>
+      <div>
+        <Options total={total} updateFeedback={updateFeedback} />
+      </div>
+      <div>
+        {total > 0 && (
+          <Feedback
+            good={feedback.good}
+            neutral={feedback.neutral}
+            bad={feedback.bad}
             
-              total={total}
+            total={total}
             
-              positive={positive}
-              updateFeedback={updateFeedback}
+            positive={positive}
+            updateFeedback={updateFeedback}
               
 
-            />
-          )}
-        </div>
-        <div>
+          />
+        )}
+      </div>
+      <div>
+        {total <= 0 && (
           <Notification />
+        )}
         </div>
-      </>
-
+    </>
+          
     );
-  };
+  }
 
 export default App
 

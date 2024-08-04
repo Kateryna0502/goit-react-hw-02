@@ -1,5 +1,5 @@
 const Options = ({ good, neutral, bad, total, updateFeedback, resetFeedback }) => {
-//    Передати <Options total={total} updateFeedback={updateFeedback} />
+
     return (
         <div>
             <button type="button" onClick={() => updateFeedback("good")}>
